@@ -1,0 +1,25 @@
+{
+  "name": "bookshelf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "yarn jest --notify",
+    "start": "yarn -s build && node lib/index.js",
+    "build": "babel -q src --out-dir lib",
+    "watch": "yarn test --watch"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^22.4.4"
+  }
+}
