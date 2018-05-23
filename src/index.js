@@ -1,22 +1,14 @@
 import 'babel-polyfill'
 import mongoose from 'mongoose'
-
-const openConnection = () => new Promise((resolve, reject) => {
-  mongoose.connect('mongodb://localhost/bookshelf')
-  const db = mongoose.connection
-  db.on('error', () => {
-    reject(new Error('connection error'))
-  })
-  db.once('open', () => {
-    console.log('connected!')
-    resolve()
-  })
-})
+import repl from 'repl'
+import Book from './Book'
 
 const main = async () => {
-  await openConnection()
+  await mongoose.connect('mongodb://localhost/bookshelf')
 }
 
 main()
-  .then(() => {}, error => { console.log(error) })
-  .then(() => process.exit())
+  .then(() => { console.log() }, error => { console.log(error) })
+  .then(() => {
+    repl.start({ useGlobal: true }).context.Book = Book
+  })
