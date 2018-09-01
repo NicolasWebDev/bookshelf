@@ -1,14 +1,23 @@
 import 'babel-polyfill'
+import express from 'express'
 import mongoose from 'mongoose'
-import repl from 'repl'
 import Book from './Book'
 
-const main = async () => {
-  await mongoose.connect('mongodb://localhost/bookshelf')
-}
+const DB_URL = 'mongodb://localhost/bookshelf'
+const PORT = 3000
 
-main()
-  .then(() => { console.log() }, error => { console.log(error) })
-  .then(() => {
-    repl.start({ useGlobal: true }).context.Book = Book
-  })
+const app = express()
+
+mongoose.connect(DB_URL)
+mongoose.Promise = global.Promise
+const db = mongoose.connection
+db.on('error', console.error.bind(console, 'MongoDB connection error:'))
+
+app.get('/', async (req, res) => {
+  const books = await Book.find()
+  res.send(books)
+})
+
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}!`)
+})
