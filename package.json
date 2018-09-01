@@ -5,9 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "yarn jest --notify",
-    "start": "yarn -s build && node lib/index.js",
+    "start": "nodemon --exec 'yarn -s build && node lib/index.js'",
     "build": "babel -q src --out-dir lib",
     "watch": "yarn test --watch"
+  },
+  "nodemonConfig": {
+    "ignore": ["lib/*"]
   },
   "keywords": [],
   "license": "ISC",
@@ -22,6 +25,7 @@
     "babel-preset-env": "^1.7.0",
     "eslint-plugin-prettier": "^2.6.2",
     "jest": "^22.4.4",
+    "nodemon": "^1.18.4",
     "prettier": "1.14.2"
   },
   "dependencies": {
