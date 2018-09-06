@@ -15,7 +15,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 app.get('/', async (req, res) => {
   const books = await Book.find()
-  res.send(books)
+  res.send({ books })
 })
 
 app.listen(PORT, () => {
