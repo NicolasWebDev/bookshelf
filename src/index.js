@@ -22,9 +22,8 @@ app.get('/', async (req, res) => {
 
 app.post('/book', async (req, res) => {
   const { amazonURL } = req.body
-  Book.fromAmazonURL(amazonURL)
-  console.log(req.body)
-  res.json(req.body)
+  const book = await Book.fromAmazonURL(amazonURL)
+  res.json(await book.save())
 })
 
 app.listen(PORT, () => {

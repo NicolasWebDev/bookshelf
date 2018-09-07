@@ -62,14 +62,14 @@ bookSchema.statics = {
       console.log(text)
     }
   },
-  fromAmazonURL: function(url) {
-    // const amazonBook = new AmazonBook(url)
-    // console.log({
-    //   title: amazonBook.title(),
-    //   authors: amazonBook.authors(),
-    //   nbReviews: amazonBook.reviewsCount(),
-    //   stars: amazonBook.reviewsRating()
-    // })
+  fromAmazonURL: async function(url) {
+    const amazonBook = await AmazonBook.buildFromUrl(url)
+    return new this({
+      title: amazonBook.title(),
+      author: amazonBook.authors()[0],
+      nbReviews: amazonBook.reviewsCount(),
+      stars: amazonBook.reviewsRating()
+    })
   }
 }
 
