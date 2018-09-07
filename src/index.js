@@ -20,7 +20,9 @@ app.get('/', async (req, res) => {
   res.send({ books })
 })
 
-app.post('/book', (req, res) => {
+app.post('/book', async (req, res) => {
+  const { amazonURL } = req.body
+  Book.fromAmazonURL(amazonURL)
   console.log(req.body)
   res.json(req.body)
 })
