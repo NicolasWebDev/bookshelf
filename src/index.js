@@ -8,7 +8,7 @@ const DB_URL = 'mongodb://localhost/bookshelf'
 const PORT = 3001
 
 const app = express()
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 
 mongoose.connect(DB_URL)
 mongoose.Promise = global.Promise
