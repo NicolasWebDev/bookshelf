@@ -21,10 +21,13 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 const app = express()
 app.use(bodyParser.json())
 
-app.get('/', async (req, res) => {
-  const books = await Book.find()
-  res.send({ books })
-})
+app.get(
+  '/',
+  asyncHandler(async (req, res) => {
+    const books = await Book.find()
+    res.send({ books })
+  })
+)
 
 app.post(
   '/book',
