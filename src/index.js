@@ -22,7 +22,7 @@ const app = express()
 app.use(bodyParser.json())
 
 app.get(
-  '/',
+  '/books',
   asyncHandler(async (req, res) => {
     const books = await Book.find()
     res.send({ books })
