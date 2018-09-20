@@ -22,7 +22,7 @@ const app = express()
 app.use(bodyParser.json())
 
 app.get(
-  '/books',
+  '/api/books',
   asyncHandler(async (req, res) => {
     const books = await Book.find()
     res.send({ books })
@@ -30,7 +30,7 @@ app.get(
 )
 
 app.post(
-  '/book',
+  '/api/book',
   asyncHandler(async (req, res) => {
     const { amazonURL } = req.body
     const book = await Book.fromAmazonURL(amazonURL)
