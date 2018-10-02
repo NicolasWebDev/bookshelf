@@ -38,6 +38,16 @@ app.post(
   })
 )
 
+app.put(
+  '/api/books/:bookId',
+  asyncHandler(async (req, res) => {
+    const { priority } = req.body
+    const { bookId } = req.params
+    const result = await Book.findOneAndUpdate({ _id: bookId }, { priority })
+    res.json(result)
+  })
+)
+
 app.use(errorHandler)
 
 app.listen(PORT, () => {
